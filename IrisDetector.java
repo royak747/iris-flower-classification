@@ -89,21 +89,29 @@ public class IrisDetector {
 
 
 	public String predictSpecies(double sepalLength, double sepalWidth, double petalLength, double petalWidth, int k) {
-		// Find the k-nearest neighbors
+		/* Creates an empty List "neighbors" which will hold the user-provided data points along with their corresponding distances from the new data point */
 		List<IrisData> neighbors = new ArrayList<>();
+		/* A for loop that iterates through each IrisData object in the trainingData list. In each iteration, 
+  		   we calculate the euclidian distance between the current data object and the new data point.*/
 		for (IrisData data : trainingData) {
 			double distance = Math.sqrt(Math.pow(sepalLength - data.getSepalLength(), 2)
 					+ Math.pow(sepalWidth - data.getSepalWidth(), 2)
 					+ Math.pow(petalLength - data.getPetalLength(), 2)
 					+ Math.pow(petalWidth - data.getPetalWidth(), 2));
-
+			// After calculating the distance, store it in the "data" object using the "setDistance" method
 			data.setDistance(distance);
+			// Add the data to the "neighbors" List
 			neighbors.add(data);
 		}
 
+		/* 
+  		Lamda expression that sorts each distance in "neighbors" List in ascending order. 
+  		- The lambda expression compares two "IrisData" objects, namely "a" and "b"
+     		- Sorting uses a comparator to determine the order in which the "IrisData" objects are placed
+		*/
 		neighbors.sort((a, b) -> Double.compare(a.getDistance(), b.getDistance()));
 
-		// Count the occurrences of each species in the k-nearest neighbors
+		// Count the occurrences of each species up to "k" times as specified in the main method
 		Map<String, Integer> speciesCount = new HashMap<>();
 		for (int i = 0; i < k; i++) {
 			IrisData neighbor = neighbors.get(i);
@@ -121,6 +129,7 @@ public class IrisDetector {
 			}
 		}
 
+		/* Returns a string that represents the predicted species */
 		return predictedSpecies;
 	}
 
