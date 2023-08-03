@@ -111,25 +111,41 @@ public class IrisDetector {
 		*/
 		neighbors.sort((a, b) -> Double.compare(a.getDistance(), b.getDistance()));
 
-		// Count the occurrences of each species up to "k" times as specified in the main method
+		/* 
+  		Initializes an empty HashMap called speciesCount, which will store the count of occurrences of each species. 
+    		- The species name is represented as the key
+      		- The count is represented as an integer value
+		*/
 		Map<String, Integer> speciesCount = new HashMap<>();
+		// Count the occurrences of each species up to "k" times as specified in the main method
 		for (int i = 0; i < k; i++) {
+			// Retrieves the i-th nearest neighbor from the sorted "neighbbors"
 			IrisData neighbor = neighbors.get(i);
+			/* 
+   			Updates the count of the species
+      			- Checks if the "speciesCount" map already contains the name as a key
+	 		- If it does it returns the count associated with the key and increments
+    			- If not, it returns 0 and increments
+   			*/
 			speciesCount.put(neighbor.getSpecies(), speciesCount.getOrDefault(neighbor.getSpecies(), 0) + 1);
 		}
 
 		// Find the most common species
 		String predictedSpecies = "";
 		int maxCount = 0;
+		// Iterate the "species" in "speciesCount" map
 		for (String species : speciesCount.keySet()) {
+			// Int "count" variable to hold the count of the particular species
 			int count = speciesCount.get(species);
+			// Update "predictedSpecies" with the current "species" if "count" > "maxCount"
 			if (count > maxCount) {
 				predictedSpecies = species;
+				// Update maxCount accordingly
 				maxCount = count;
 			}
 		}
 
-		/* Returns a string that represents the predicted species */
+		// Returns a string that represents the predicted species
 		return predictedSpecies;
 	}
 
