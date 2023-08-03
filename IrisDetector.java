@@ -125,8 +125,8 @@ public class IrisDetector {
 			/* 
    			Updates the count of the species
       			- Checks if the "speciesCount" map already contains the name as a key
-	 		- If it does it returns the count associated with the key and increments
-    			- If not, it returns 0 and increments
+	 		- If it does, return the count associated with the key and increment
+    			- If not, return 0 and increment
    			*/
 			speciesCount.put(neighbor.getSpecies(), speciesCount.getOrDefault(neighbor.getSpecies(), 0) + 1);
 		}
