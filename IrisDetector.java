@@ -187,7 +187,7 @@ public class IrisDetector {
 		try {
 			/* 
    			Calls loadTrainingData() method with the filepath to the Iris Data Set .csv file as the parameter. 
-   			Replace "FILEPATH" with the filepath of where you saved your .csv file on your computer.
+   			Replace FILEPATH with the filepath of where you saved your .csv file on your computer.
       			*/
 			classifier.loadTrainingData("FILEPATH");
 			// User provides the dimensions for prediction
