@@ -10,12 +10,24 @@ import java.util.Map;
 
 
 public class IrisDetector {
+	/* 
+ 	Private instance variable of type List which can hold "IrisData" objects. 
+ 	We will be using this variable to hold all of the data for each flower in the Iris Data Set 
+  	*/
 	private List<IrisData> trainingData;
-
+	// Constructor which, when called, creates an object of the "IrisDetector" class with an initialized empty List "trainingData"
 	public IrisDetector() {
 		trainingData = new ArrayList<>();
 	}
-
+	/* 
+ 	A static inner class which defines certain aspects of an Iris flower:
+ 	- Length of sepal
+  	- Length of petal
+   	- Witdh of sepal
+    	- Width of petal
+     	- Species name
+      	- Distance, which will be used to calculate variation of user-provided dimensions with the dimensions provided in the .csv file
+     	*/
 	public static class IrisData {
 		private double sepalLength;
 		private double sepalWidth;
@@ -61,6 +73,7 @@ public class IrisDetector {
 		}
 	}
 
+	// This method will traverse all the lines of the Iris Data Set .csv file and add the data in the file to "trainingData"
 	public void loadTrainingData(String csvFilePath) throws IOException {
 	    // BufferedReader will help read lines within a file
 	    try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
@@ -106,7 +119,7 @@ public class IrisDetector {
 	    }
 	}
 
-
+	// This method predicts the species of Iris based on the data provided using the KNN algorithm
 	public String predictSpecies(double sepalLength, double sepalWidth, double petalLength, double petalWidth, int k) {
 		/* Creates an empty List "neighbors" which will hold the user-provided data points along with their corresponding distances from the new data point */
 		List<IrisData> neighbors = new ArrayList<>();
@@ -169,18 +182,23 @@ public class IrisDetector {
 	}
 
 	public static void main(String[] args) {
+		// Creates a new instance of the IrisDetector class
 		IrisDetector classifier = new IrisDetector();
 		try {
-			classifier.loadTrainingData("/Users/ankanroy/Desktop/IrisDataset/iris.csv");
-
-			// Provide the new data point for prediction
+			/* 
+   			Calls loadTrainingData() method with the filepath to the Iris Data Set .csv file as the parameter. 
+   			Replace "FILEPATH" with the filepath of where you saved your .csv file on your computer.
+      			*/
+			classifier.loadTrainingData("FILEPATH");
+			// User provides the dimensions for prediction
 			double sepalLength = 6.5;
 			double sepalWidth = 3;
 			double petalLength = 5.4;
 			double petalWidth = 2.4;
-			int k = 3; // Number of neighbors to consider
-
+			int k = 3; // Number of neighbors to consider (Note: a higher "k" value will lead to more accurate results)
+			// Calls the predictSpecies() method and stores the result in a string "predictedSpecies"
 			String predictedSpecies = classifier.predictSpecies(sepalLength, sepalWidth, petalLength, petalWidth, k);
+			// Prints the predicted species to the console
 			System.out.println("Predicted species: " + predictedSpecies);
 		} catch (IOException e) {
 			e.printStackTrace();
