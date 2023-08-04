@@ -1,4 +1,4 @@
-/* Ankan Roy */
+/* Ankan Roy - Personal Project - Using Java to Develop an Iris Flower Classification Algortithm */
 
 import java.io.BufferedReader;
 import java.io.FileReader;
