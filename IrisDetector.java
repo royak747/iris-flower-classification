@@ -8,7 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/* 
+This is my representation of an Iris flower classification program. There are three main steps to the program:
+- Initialize variables that will store data, including length and with of sepal/petal
+- Train data, or store all of the data collected from a csv file to be used for prediction
+- Predict the species of Iris using the K nearest neighbors (K-NN) algorithm
+*/
 public class IrisDetector {
 	/* 
  	Private instance variable of type List which can hold "IrisData" objects. 
