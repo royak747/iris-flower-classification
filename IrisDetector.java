@@ -126,7 +126,7 @@ public class IrisDetector {
 
 	// This method predicts the species of Iris based on the data provided using the KNN algorithm
 	public String predictSpecies(double sepalLength, double sepalWidth, double petalLength, double petalWidth, int k) {
-		/* Creates an empty List "neighbors" which will hold the user-provided data points along with their corresponding distances from the new data point */
+		/* Creates an empty List "neighbors" which will hold the distance between the user-provided data points and the new data points */
 		List<IrisData> neighbors = new ArrayList<>();
 		/* A for loop that iterates through each IrisData object in the trainingData list. In each iteration, 
   		   we calculate the euclidian distance between the current data object and the new data point.*/
