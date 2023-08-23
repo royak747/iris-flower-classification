@@ -17,7 +17,7 @@ This is my representation of an Iris flower classification program. There are th
 public class IrisDetector {
 	/* 
  	Private instance variable of type List which can hold "IrisData" objects. 
- 	We will be using this variable to hold all of the data for each flower in the Iris Data Set
+ 	We will be using this variable to hold all of the data for each flower in the Iris Data Set.
   	*/
 	private List<IrisData> trainingData;
 	// Constructor which, when called, creates an object of the "IrisDetector" class with an initialized empty List "trainingData"
