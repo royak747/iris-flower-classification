@@ -79,49 +79,59 @@ public class IrisDetector {
 	}
 
 	// This method will traverse all the lines of the Iris Data Set .csv file and add the data in the file to "trainingData"
-	public void loadTrainingData(String csvFilePath) throws IOException {
-	    // BufferedReader will help read lines within a file
-	    try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
-	        String line;
-		// Traverse every row of the .csv file and add the data into "trainingData"
-	        while ((line = br.readLine()) != null) {
-		    /* 
-      			Uses the .split() method to separate the length and width of the sepal and 
-      			petal along with the species name with a comma 
-	 	    */
-	            String[] data = line.split(",");
-		    /* 
-      			The .csv file should have 5 values:
-      			- Length of sepal and petal
-	 		- Width of sepal and petal
-    			- Species name
-       			If it does not have 5 values, print an error message
-		    */
-	            if (data.length != 5) {
-	                System.err.println("Invalid data format in the CSV file: " + line);
-	                continue;
-	            }
-		    /* 
-      			Variables to hold dimensions of the flower. If the data in the .csv file cannot be parsed into a Double type, 
-      			it returns an error message. This does not necessarily mean that the program is wrong, as it can mean that the data is 
-	 		something such as the title of a column, and if so, simply delete the row with the titles.
-		    */
-	            double sepalLength, sepalWidth, petalLength, petalWidth;
-	            try {
-	                sepalLength = Double.parseDouble(data[0]);
-	                sepalWidth = Double.parseDouble(data[1]);
-	                petalLength = Double.parseDouble(data[2]);
-	                petalWidth = Double.parseDouble(data[3]);
-	            } catch (NumberFormatException e) {
-	                System.err.println("Invalid numeric data in the CSV file: " + line);
-	                continue;
-	            }
-		    // Stores the species name in "species" String variable, and uses .trim() to delete all leading and trailing spaces
-	            String species = data[4].trim();
-		    // Add the data to "trainingData"
-	            trainingData.add(new IrisData(sepalLength, sepalWidth, petalLength, petalWidth, species));
-	        }
-	    }
+	public void loadTrainingData(String csvFilePath) {
+	   	// BufferedReader will help read lines within a file
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(csvFilePath));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String line;
+		try {
+			// Traverse every row of the .csv file and add the data into "trainingData"
+			while ((line = br.readLine()) != null) {
+				/* 
+      				Uses the .split() method to separate the length and width of the sepal and 
+      				petal along with the species name with a comma 
+				 */
+				String[] data = line.split(",");
+				/* 
+      				The .csv file should have 5 values:
+      				- Length of sepal and petal
+	 				- Width of sepal and petal
+    				- Species name
+       				If it does not have 5 values, print an error message
+				 */
+				if (data.length != 5) {
+					System.err.println("Invalid data format in the CSV file: " + line);
+					continue;
+				}
+				/* 
+      				Variables to hold dimensions of the flower. If the data in the .csv file cannot be parsed into a Double type, 
+      				it returns an error message. This does not necessarily mean that the program is wrong, as it can mean that the data is 
+	 				something such as the title of a column, and if so, simply delete the row with the titles.
+				 */
+				double sepalLength, sepalWidth, petalLength, petalWidth;
+				try {
+					sepalLength = Double.parseDouble(data[0]);
+					sepalWidth = Double.parseDouble(data[1]);
+					petalLength = Double.parseDouble(data[2]);
+					petalWidth = Double.parseDouble(data[3]);
+				} catch (NumberFormatException e) {
+					System.err.println("Invalid numeric data in the CSV file: " + line);
+					continue;
+				}
+				// Stores the species name in "species" String variable, and uses .trim() to delete all leading and trailing spaces
+				String species = data[4].trim();
+				// Add the data to "trainingData"
+				trainingData.add(new IrisData(sepalLength, sepalWidth, petalLength, petalWidth, species));
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// This method predicts the species of Iris based on the data provided using the KNN algorithm
