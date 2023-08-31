@@ -199,24 +199,20 @@ public class IrisDetector {
 	public static void main(String[] args) {
 		// Creates a new instance of the IrisDetector class
 		IrisDetector classifier = new IrisDetector();
-		try {
-			/* 
-   			Calls loadTrainingData() method with the filepath to the Iris Data Set .csv file as the parameter. 
-   			Replace FILEPATH with the filepath of where you saved your .csv file on your computer.
-      			*/
-			classifier.loadTrainingData("FILEPATH");
-			// User provides the dimensions for prediction
-			double sepalLength = 6.5;
-			double sepalWidth = 3;
-			double petalLength = 5.4;
-			double petalWidth = 2.4;
-			int k = 3; // Number of neighbors to consider (Note: a higher "k" value will lead to more accurate results)
-			// Calls the predictSpecies() method and stores the result in a string "predictedSpecies"
-			String predictedSpecies = classifier.predictSpecies(sepalLength, sepalWidth, petalLength, petalWidth, k);
-			// Prints the predicted species to the console
-			System.out.println("Predicted species: " + predictedSpecies);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		/* 
+   		Calls loadTrainingData() method with the filepath to the Iris Data Set .csv file as the parameter. 
+   		Replace FILEPATH with the filepath of where you saved your .csv file on your computer.
+      		*/
+		classifier.loadTrainingData("FILEPATH");
+		// User provides the dimensions for prediction
+		double sepalLength = 6.5;
+		double sepalWidth = 3;
+		double petalLength = 5.4;
+		double petalWidth = 2.4;
+		int k = 3; // Number of neighbors to consider (Note: a higher "k" value will lead to more accurate results)
+		// Calls the predictSpecies() method and stores the result in a string "predictedSpecies"
+		String predictedSpecies = classifier.predictSpecies(sepalLength, sepalWidth, petalLength, petalWidth, k);
+		// Prints the predicted species to the console
+		System.out.println("Predicted species: " + predictedSpecies);
 	}
 }
